@@ -1,0 +1,49 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6df370c..d7c3c8f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -81,6 +81,9 @@ if(NOT MINGW AND (WIN32 OR WIN64))
+         ${CMAKE_CURRENT_SOURCE_DIR}/windows/freetype)
+ endif()
+ 
++set(_OPENGL_INCLUDE_PATH /gpfs/runtime/opt/opengl/nvidia-375.66/include)
++set(_OPENGL_LIB_PATH /gpfs/runtime/opt/opengl/nvidia-375.66/lib64)
++
+ find_package(OpenGL REQUIRED)
+ find_package(Freetype REQUIRED)
+ 
+@@ -159,6 +162,8 @@ if(freetype-gl_BUILD_MAKEFONT)
+     endif()
+ endif()
+ 
++set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "default install path" FORCE)
++
+ install(TARGETS freetype-gl 
+   RUNTIME DESTINATION bin
+   LIBRARY DESTINATION lib
+diff --git a/cmake/Modules/FindGLEW.cmake b/cmake/Modules/FindGLEW.cmake
+index 3d52da4..db88eca 100644
+--- a/cmake/Modules/FindGLEW.cmake
++++ b/cmake/Modules/FindGLEW.cmake
+@@ -28,7 +28,9 @@ ELSE (WIN32)
+ 		/sw/include
+ 		/opt/local/include
+ 		${GLEW_ROOT_DIR}/include
+-		DOC "The directory where GL/glew.h resides")
++		DOC "The directory where GL/glew.h resides"
++		HINTS
++		ENV CPATH)
+ 
+ 	# Prefer the static library.
+ 	FIND_LIBRARY( GLEW_LIBRARY
+@@ -41,7 +43,9 @@ ELSE (WIN32)
+ 		/sw/lib
+ 		/opt/local/lib
+ 		${GLEW_ROOT_DIR}/lib
+-		DOC "The GLEW library")
++		DOC "The GLEW library"
++		HINTS
++		ENV LD_LIBRARY_PATH)
+ ENDIF (WIN32)
+ 
+ SET(GLEW_FOUND "NO")

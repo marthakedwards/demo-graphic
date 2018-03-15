@@ -34,7 +34,7 @@ include_directories(
    ${FREETYPE_LIBRARIES})
 
   add_executable(textureDemo textureDemo.cpp)
-  add_dependencies(textureDemo freetypegl-download)
+  # add_dependencies(textureDemo freetypegl-download)
 
   target_link_libraries(textureDemo PUBLIC bsg freetypegl
    ${FREEGLUT_LIBRARY}
@@ -105,7 +105,7 @@ include_directories(
 
     add_executable(demo4 demo4.cpp)
 
-    target_link_libraries(demo4 PUBLIC freetypegl bsg MinVR::MinVR
+    target_link_libraries(demo4 PUBLIC bsg freetypegl MinVR::MinVR
       ${FREEGLUT_LIBRARY}
       ${OPENGL_LIBRARY}
       ${GLEW_LIBRARY}
@@ -133,7 +133,7 @@ include_directories(
 
     add_executable(objDemoMinVR objDemoMinVR.cpp)
 
-    target_link_libraries(objDemoMinVR PUBLIC freetypegl bsg MinVR::MinVR
+    target_link_libraries(objDemoMinVR PUBLIC bsg freetypegl MinVR::MinVR
       ${FREEGLUT_LIBRARY}
       ${OPENGL_LIBRARY}
       ${GLEW_LIBRARY}
